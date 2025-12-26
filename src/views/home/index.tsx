@@ -496,7 +496,7 @@ const GameSandbox: FC = () => {
     if (savedStats) {
       setStats(JSON.parse(savedStats));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update best streak
@@ -506,7 +506,7 @@ const GameSandbox: FC = () => {
       setStats(updatedStats);
       localStorage.setItem("cryptoHangmanStats", JSON.stringify(updatedStats));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [streak]);
 
   // Keyboard event listener
@@ -564,7 +564,7 @@ const GameSandbox: FC = () => {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     gameStatus,
     guessedLetters,
@@ -739,15 +739,8 @@ const GameSandbox: FC = () => {
         `❌ Security breach complete`,
         `💀 Streak reset to 0`,
       ]);
-
-      // Still show definition even on loss for educational value
-      const definition = getDefinition(word);
-      setCurrentDefinition(definition);
-      setTimeout(() => {
-        setShowDefinition(true);
-      }, 1500);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guessedLetters, wrongGuesses, word, gameStatus]);
 
   // Handle letter guess
@@ -765,7 +758,9 @@ const GameSandbox: FC = () => {
       if (newWrongGuesses === HANGMAN_STAGES - 1) {
         setMessage("🚨 LAST CHANCE! One wrong = WIPED!");
       } else {
-        setMessage(`❌ Wrong! ${HANGMAN_STAGES - newWrongGuesses} attempts left`);
+        setMessage(
+          `❌ Wrong! ${HANGMAN_STAGES - newWrongGuesses} attempts left`
+        );
       }
     } else {
       const count = word.split("").filter((l) => l === letter).length;
@@ -801,12 +796,12 @@ const GameSandbox: FC = () => {
   // Render hangman graphic
   const renderHangman = () => {
     return (
-      <div className="relative h-36 w-28 mx-auto">
+      <div className="relative h-32 w-full mx-auto">
         {/* Gallows */}
         <div className="absolute left-1/2 top-0 h-1.5 w-16 -translate-x-1/2 bg-amber-900 rounded"></div>
         <div className="absolute left-1/2 top-0 h-28 w-1.5 -translate-x-1/2 bg-amber-900 rounded"></div>
-        <div className="absolute bottom-0 left-1/2 h-1.5 w-20 -translate-x-1/2 bg-amber-900 rounded"></div>
-        <div className="absolute -bottom-1 left-1/2 h-3 w-24 -translate-x-1/2 rounded bg-gradient-to-r from-gray-800 to-gray-900"></div>
+        <div className="absolute bottom-3 left-1/2 h-1.5 w-20 -translate-x-1/2 bg-amber-900 rounded"></div>
+        <div className="absolute bottom-2 left-1/2 h-3 w-24 -translate-x-1/2 rounded bg-gradient-to-r from-gray-800 to-gray-800"></div>
 
         {/* Rope */}
         {wrongGuesses >= 1 && (
@@ -815,7 +810,7 @@ const GameSandbox: FC = () => {
 
         {/* Wallet Head */}
         {wrongGuesses >= 2 && (
-          <div className="absolute left-1/2 top-6 h-9 w-9 -translate-x-1/2">
+          <div className="absolute left-1/2 top-6 h-8 w-8 -translate-x-1/2">
             <div
               className={`h-full w-full rounded-full border-2 ${
                 wrongGuesses >= 7 ? "border-red-700" : "border-red-500"
@@ -827,8 +822,8 @@ const GameSandbox: FC = () => {
             >
               {wrongGuesses < 7 ? (
                 <>
-                  <div className="absolute left-1/2 top-1/2 h-3 w-5 -translate-x-1/2 -translate-y-1/2 rounded-sm border border-yellow-300"></div>
-                  <div className="absolute left-1/2 top-3/4 h-0.5 w-3 -translate-x-1/2 rounded-full bg-yellow-300"></div>
+                  <div className="absolute left-1/2 top-[16px] h-3 w-5 -translate-x-1/2 -translate-y-1/2 rounded-sm border border-yellow-300"></div>
+                  <div className="absolute left-1/2 top-[23px] h-0.5 w-3 -translate-x-1/2 rounded-full bg-yellow-300"></div>
                 </>
               ) : (
                 <>
@@ -842,34 +837,27 @@ const GameSandbox: FC = () => {
 
         {/* Body */}
         {wrongGuesses >= 3 && (
-          <div className="absolute left-1/2 top-15 h-14 w-0.5 -translate-x-1/2 bg-red-500"></div>
+          <div className="absolute left-1/2 top-14 h-6 w-0.5 -translate-x-1/2 bg-red-500"></div>
         )}
 
         {/* Left arm */}
         {wrongGuesses >= 4 && (
-          <div className="absolute left-1/2 top-16 h-7 w-0.5 -translate-x-1/2 -rotate-45 bg-red-500 origin-top"></div>
+          <div className="absolute left-1/2 top-14 h-7 w-0.5 -translate-x-1/2 -rotate-45 bg-red-500 origin-top"></div>
         )}
 
         {/* Right arm */}
         {wrongGuesses >= 5 && (
-          <div className="absolute left-1/2 top-16 h-7 w-0.5 -translate-x-1/2 rotate-45 bg-red-500 origin-top"></div>
+          <div className="absolute left-1/2 top-14 h-7 w-0.5 -translate-x-1/2 rotate-45 bg-red-500 origin-top"></div>
         )}
 
         {/* Left leg */}
         {wrongGuesses >= 6 && (
-          <div className="absolute left-1/2 top-29 h-9 w-0.5 -translate-x-1/2 -rotate-30 bg-red-500 origin-top"></div>
+          <div className="absolute left-1/2 top-20 h-7 w-0.5 -translate-x-1/2 -rotate-45 bg-red-500 origin-top"></div>
         )}
 
         {/* Right leg */}
         {wrongGuesses >= 7 && (
-          <div className="absolute left-1/2 top-29 h-9 w-0.5 -translate-x-1/2 rotate-30 bg-red-500 origin-top"></div>
-        )}
-
-        {/* Critical warning */}
-        {wrongGuesses >= 5 && wrongGuesses < 7 && (
-          <div className="absolute -right-8 top-2 animate-pulse text-[9px] font-bold text-red-500">
-            ⚠️
-          </div>
+          <div className="absolute left-1/2 top-20 h-7 w-0.5 -translate-x-1/2 rotate-45 bg-red-500 origin-top"></div>
         )}
       </div>
     );
@@ -909,7 +897,7 @@ const GameSandbox: FC = () => {
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
         <div className="relative w-full max-w-sm rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 to-slate-950 p-4 shadow-xl">
           <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-            <div className="rounded-full bg-gradient-to-r from-cyan-600 to-purple-600 px-4 py-1 text-xs font-bold">
+            <div className="rounded-full w-[200px] bg-gradient-to-r from-cyan-600 to-purple-600 px-4 py-1 text-xs font-semibold">
               🎓 CRYPTO KNOWLEDGE
             </div>
           </div>
@@ -927,7 +915,7 @@ const GameSandbox: FC = () => {
                 <div className="text-[10px] text-slate-400 mb-1">
                   DEFINITION
                 </div>
-                <div className="text-sm text-slate-200">
+                <div className="text-xs text-slate-200">
                   {currentDefinition.definition}
                 </div>
               </div>
@@ -968,7 +956,7 @@ const GameSandbox: FC = () => {
                   setShowDefinition(false);
                   setShowDifficultySelect(true);
                 }}
-                className="flex-1 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 py-2 text-sm font-bold hover:opacity-90"
+                className="flex-1 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 py-2 text-xs font-semibold hover:opacity-90"
               >
                 Continue (SPACE)
               </button>
@@ -977,7 +965,7 @@ const GameSandbox: FC = () => {
                   setShowDefinition(false);
                   startNewGame();
                 }}
-                className="flex-1 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 py-2 text-sm font-bold hover:opacity-90"
+                className="flex-1 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 py-2 text-xs font-semibold hover:opacity-90"
               >
                 New Game
               </button>
@@ -999,12 +987,12 @@ const GameSandbox: FC = () => {
 
       {/* Header with Score */}
       <div className="w-full">
-        <div className="flex items-center justify-between mb-1">
+        <div className="flex items-center justify-between">
           <div className="text-left">
-            <h1 className="text-base font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <h1 className="text-base font-bold bg-gradient-to-r from-[#e5ff4a] to-yellow-500 bg-clip-text text-transparent">
               🔐 Hashman
             </h1>
-            <div className="text-[8px] text-slate-500 mt-0.5">
+            <div className="text-[8px] text-slate-500">
               160+ terms • Learn while you play
             </div>
           </div>
@@ -1012,7 +1000,9 @@ const GameSandbox: FC = () => {
             <div className="text-xs font-bold text-cyan-400">{score} pts</div>
             <div className="flex items-center gap-1">
               {streak > 0 && (
-                <div className="text-[9px] text-purple-400">🔥 {streak} streak</div>
+                <div className="text-[9px] text-purple-400">
+                  🔥 {streak} streak
+                </div>
               )}
               <div className="text-[8px] text-slate-500">
                 Terms: {stats.termsLearned || 0}
@@ -1030,7 +1020,7 @@ const GameSandbox: FC = () => {
             {renderHangman()}
 
             {/* Attempts Counter */}
-            <div className="mt-2 text-center">
+            <div className="text-center">
               <div className="text-[9px] text-slate-400 mb-1">
                 Attempts {HANGMAN_STAGES - wrongGuesses}/7
               </div>
@@ -1053,7 +1043,14 @@ const GameSandbox: FC = () => {
           {/* Security Status */}
           <div className="rounded-lg border border-cyan-500/20 bg-gradient-to-b from-cyan-900/10 to-cyan-900/5 p-2 mb-2">
             <div className="flex justify-between items-center mb-1">
-              <div className="text-[9px] text-cyan-300">Security</div>
+              <div className="flex gap-1 items-center">
+                <p className="text-[9px] text-cyan-300">Security</p>
+                {wrongGuesses >= 5 && wrongGuesses < 7 && (
+                  <div className="animate-pulse text-[9px] font-bold text-red-500">
+                    ⚠️
+                  </div>
+                )}
+              </div>
               <div
                 className={`text-[8px] px-1.5 py-0.5 rounded ${getDifficultyColor(
                   difficulty
@@ -1111,11 +1108,6 @@ const GameSandbox: FC = () => {
         }`}
       >
         {message}
-        {gameStatus !== "playing" && !showDefinition && (
-          <div className="text-[9px] mt-1 opacity-80">
-            Learn about this term...
-          </div>
-        )}
       </div>
 
       {/* Transaction Log */}
@@ -1172,7 +1164,7 @@ const GameSandbox: FC = () => {
 
       {/* Game Controls */}
       {showDifficultySelect ? (
-        <div className="w-full space-y-1">
+        <div className="absolute bottom-8 w-[90%] space-y-1 border border-cyan-500/30 bg-slate-900 shadow-lg p-4">
           <div className="text-[9px] text-center text-slate-400 mb-1">
             Select Difficulty (Press 1-4 or ESC)
           </div>
@@ -1185,7 +1177,7 @@ const GameSandbox: FC = () => {
                     setDifficulty(diff);
                     startNewGame();
                   }}
-                  className={`rounded-md py-1.5 text-[10px] font-bold transition-all flex flex-col items-center ${
+                  className={`rounded-md py-1.5 text-[8px] font-bold transition-all flex flex-col items-center ${
                     diff === "easy"
                       ? "bg-green-900/50 hover:bg-green-900/70"
                       : diff === "medium"
@@ -1245,7 +1237,7 @@ const GameSandbox: FC = () => {
               : "bg-red-900/50 text-red-300"
           }`}
         >
-          {gameStatus === "won" ? "✅ SECURED" : "💀 WIPED"}
+          {gameStatus === "won" ? "✅ WALLET SECURED" : "💀 WALLET WIPED"}
         </div>
       )}
 
