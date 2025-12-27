@@ -897,7 +897,7 @@ const GameSandbox: FC = () => {
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
         <div className="relative w-full max-w-sm rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-slate-900 to-slate-950 p-4 shadow-xl">
           <div className="absolute -top-2 left-1/2 -translate-x-1/2">
-            <div className="rounded-full w-[200px] bg-gradient-to-r from-cyan-600 to-purple-600 px-4 py-1 text-xs font-semibold">
+            <div className="rounded-full w-[200px] bg-gradient-to-r from-cyan-600 to-purple-600 px-4 py-1 text-xs font-semibold flex justify-center">
               🎓 CRYPTO KNOWLEDGE
             </div>
           </div>
